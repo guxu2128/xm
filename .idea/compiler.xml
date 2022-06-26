@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -11,6 +12,7 @@
         <module name="common-util" />
         <module name="model" />
         <module name="service-util" />
+        <module name="service-hosp" />
         <module name="hospital-manage" />
       </profile>
     </annotationProcessing>
@@ -19,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common-util" options="-parameters" />
       <module name="model" options="-parameters" />
+      <module name="service-hosp" options="-parameters" />
       <module name="service-util" options="-parameters" />
       <module name="xm" options="-parameters" />
     </option>
