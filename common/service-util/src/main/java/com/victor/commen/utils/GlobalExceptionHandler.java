@@ -24,6 +24,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GeneralException.class)
     @ResponseBody
     public Result error(GeneralException e){
+        e.printStackTrace();
         return Result.build(e.getCode(), e.getMessage());
     }
 }

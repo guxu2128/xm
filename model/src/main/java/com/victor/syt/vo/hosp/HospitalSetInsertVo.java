@@ -7,6 +7,9 @@ import lombok.Data;
 @Data
 @ApiModel(description = "Hospital")
 public class HospitalSetInsertVo {
+    @ApiModelProperty(value = "id")
+    private Long id;
+
     @ApiModelProperty(value = "医院名称")
     private String hosname;
 

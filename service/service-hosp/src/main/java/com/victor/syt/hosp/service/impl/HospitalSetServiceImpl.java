@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.victor.commen.exception.GeneralException;
 import com.victor.commen.result.ResultCodeEnum;
-import com.victor.commen.utils.BaseTransfer;
 import com.victor.commen.utils.MD5;
 import com.victor.syt.hosp.mapper.HospitalSetMapper;
 import com.victor.syt.hosp.service.HospitalSetService;
@@ -15,10 +14,10 @@ import com.victor.syt.vo.hosp.HospitalSetQueryVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import java.util.Random;
+import org.springframework.beans.BeanUtils;
 
 @Service
 public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, HospitalSet> implements HospitalSetService {
-    BaseTransfer baseTransfer = new BaseTransfer();
 
     @Override
     public Page<HospitalSet> findPageHospSet(long current, long limit, HospitalSetQueryVo hospitalSetQueryVo) {
@@ -56,14 +55,23 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
         //签名秘钥
         Random random = new Random();
         hospitalSetInsertVo.setSignKey(MD5.encrypt(System.currentTimeMillis()+""+random.nextInt(1000)));
-        super.save((HospitalSet) baseTransfer.toEntity(hospitalSetInsertVo));
+        HospitalSet hospitalSet = new HospitalSet();
+        BeanUtils.copyProperties(hospitalSetInsertVo,hospitalSet);
+        try {
+            super.save(hospitalSet);
+        } catch (Exception e){
+            throw new GeneralException(ResultCodeEnum.DATA_INSERT_ERROR);
+        }
+
     }
 
     @Override
     public void updateById(HospitalSetInsertVo hospitalSetInsertVo) {
-        Boolean flag = updateById((HospitalSet) baseTransfer.toEntity(hospitalSetInsertVo));
+        HospitalSet hospitalSet = new HospitalSet();
+        BeanUtils.copyProperties(hospitalSetInsertVo,hospitalSet);
+        Boolean flag = updateById(hospitalSet);
         if(!flag) {
-            throw new GeneralException(ResultCodeEnum.DATA_REMOVE_ERROR);
+            throw new GeneralException(ResultCodeEnum.DATA_INSERT_ERROR);
         }
     }
 
@@ -71,7 +79,7 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
     public void removeById(Long id) {
         boolean flag = super.removeById(id);
         if (!flag){
-            throw new GeneralException(ResultCodeEnum.DATA_INSERT_ERROR);
+            throw new GeneralException(ResultCodeEnum.DATA_REMOVE_ERROR);
         }
     }
 }
