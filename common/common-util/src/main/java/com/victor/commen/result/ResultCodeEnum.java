@@ -14,6 +14,8 @@ public enum ResultCodeEnum {
     SERVICE_ERROR(203, "服务异常"),
     DATA_ERROR(204, "数据异常"),
     DATA_UPDATE_ERROR(205, "数据版本异常"),
+    DATA_INSERT_ERROR(206, "数据插入异常"),
+    DATA_REMOVE_ERROR(207, "数据删除异常"),
 
     LOGIN_AUTH(208, "未登陆"),
     PERMISSION(209, "没有权限"),
