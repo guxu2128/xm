@@ -20,7 +20,6 @@ public class Swagger2Config {
 
     @Bean
     public Docket webApiConfig(){
-
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("webApi")
                 .apiInfo(webApiInfo())
@@ -33,7 +32,6 @@ public class Swagger2Config {
 
     @Bean
     public Docket adminApiConfig(){
-
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("adminApi")
                 .apiInfo(adminApiInfo())
@@ -45,7 +43,6 @@ public class Swagger2Config {
     }
 
     private ApiInfo webApiInfo(){
-
         return new ApiInfoBuilder()
                 .title("网站-API文档")
                 .description("本文档描述了网站微服务接口定义")
@@ -55,7 +52,6 @@ public class Swagger2Config {
     }
 
     private ApiInfo adminApiInfo(){
-
         return new ApiInfoBuilder()
                 .title("后台管理系统-API文档")
                 .description("本文档描述了后台管理系统微服务接口定义")
@@ -63,6 +59,4 @@ public class Swagger2Config {
                 .contact(new Contact("victor", "http://victor.com", "578335818@qq.com"))
                 .build();
     }
-
-
 }

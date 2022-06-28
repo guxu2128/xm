@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="server-gateway" />
+        <module name="service-cmn" />
         <module name="service-client" />
         <module name="common-util" />
         <module name="model" />
@@ -21,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common-util" options="-parameters" />
       <module name="model" options="-parameters" />
+      <module name="service-cmn" options="-parameters" />
       <module name="service-hosp" options="-parameters" />
       <module name="service-util" options="-parameters" />
       <module name="xm" options="-parameters" />
