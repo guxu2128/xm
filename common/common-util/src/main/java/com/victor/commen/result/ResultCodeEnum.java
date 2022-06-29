@@ -13,6 +13,7 @@ public enum ResultCodeEnum {
     PARAM_ERROR( 202, "参数不正确"),
     SERVICE_ERROR(203, "服务异常"),
     DATA_ERROR(204, "数据异常"),
+    DATA_TRANSFER_ERROR(204, "数据传输异常"),
     DATA_UPDATE_ERROR(205, "数据版本异常"),
     DATA_INSERT_ERROR(206, "数据插入异常"),
     DATA_REMOVE_ERROR(207, "数据删除异常"),
