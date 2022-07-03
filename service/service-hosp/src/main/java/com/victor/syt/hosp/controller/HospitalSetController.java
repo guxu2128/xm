@@ -2,6 +2,7 @@ package com.victor.syt.hosp.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.victor.commen.result.Result;
+import com.victor.syt.hosp.service.HospitalService;
 import com.victor.syt.hosp.service.HospitalSetService;
 import com.victor.syt.model.hosp.HospitalSet;
 import com.victor.syt.vo.hosp.HospitalSetInsertVo;
@@ -86,5 +87,7 @@ public class HospitalSetController {
         hospitalSetService.lockHospitalSetById(id, status);
         return Result.ok();
     }
+
+
 
 }
