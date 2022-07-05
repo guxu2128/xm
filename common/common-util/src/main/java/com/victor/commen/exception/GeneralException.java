@@ -38,7 +38,7 @@ public class GeneralException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "YyghException{" +
+        return "GeneralException{" +
                 "code=" + code +
                 ", message=" + this.getMessage() +
                 '}';
