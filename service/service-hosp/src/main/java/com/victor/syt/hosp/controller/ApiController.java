@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(tags = "医院管理接口")
+@Api(tags = "医院API管理接口")
 @RestController
 @RequestMapping("/admin/hosp/api")
 public class ApiController {
