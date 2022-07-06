@@ -1,8 +1,6 @@
 package com.victor.syt.hosp.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.victor.commen.exception.GeneralException;
-import com.victor.commen.helper.HttpRequestHelper;
 import com.victor.commen.result.Result;
 import com.victor.syt.hosp.service.DepartmentService;
 import com.victor.syt.hosp.service.HospitalService;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.Properties;
 
 @Api(tags = "医院管理接口")
 @RestController
@@ -68,18 +64,13 @@ public class ApiController {
     @ApiOperation(value = "获取排班分页列表")
     @PostMapping("schedule/list")
     public Result schedule(HttpServletRequest request) {
-
         Page<Schedule> pageModel = scheduleService.selectPage(request);
         return Result.ok(pageModel);
     }
     @ApiOperation(value = "删除科室")
     @PostMapping("schedule/remove")
     public Result removeSchedule(HttpServletRequest request) {
-
-
         scheduleService.remove(request);
         return Result.ok();
     }
-
-
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -78,6 +79,37 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         return dictListener.getFailList();
     }
 
+    @Cacheable(value = "dict",keyGenerator = "keyGenerator")
+    @Override
+    public String getNameByParentDictCodeAndValue(String parentDictCode, String value) {
+//如果value能唯一定位数据字典，parentDictCode可以传空，例如：省市区的value值能够唯一确定
+        if(StringUtils.isEmpty(parentDictCode)) {
+            Dict dict = dictMapper.selectOne(new QueryWrapper<Dict>().eq("value", value));
+            if(null != dict) {
+                return dict.getName();
+            }
+        } else {
+            Dict parentDict = this.getByDictCode(parentDictCode);
+            if(null == parentDict) return "";
+            Dict dict = dictMapper.selectOne(new QueryWrapper<Dict>().eq("parent_id", parentDict.getId()).eq("value", value));
+            if(null != dict) {
+                return dict.getName();
+            }
+        }
+        return "";
+    }
+
+    @Override
+    public List<Dict> findByDictCode(String dictCode) {
+        Dict codeDict = this.getByDictCode(dictCode);
+        if(null == codeDict) return null;
+        return this.findChildData(codeDict.getId());
+    }
+
+    private Dict getByDictCode(String parentDictCode) {
+        Dict dict = dictMapper.selectOne(new QueryWrapper<Dict>().eq("dict_code", parentDictCode));
+        return dict;
+    }
 
     //判断id下面是否有子节点
     private boolean isChildren(Long id) {
