@@ -13,7 +13,10 @@ public enum ResultCodeEnum {
     PARAM_ERROR( 202, "参数不正确"),
     SERVICE_ERROR(203, "服务异常"),
     DATA_ERROR(204, "数据异常"),
+    DATA_TRANSFER_ERROR(204, "数据传输异常"),
     DATA_UPDATE_ERROR(205, "数据版本异常"),
+    DATA_INSERT_ERROR(206, "数据插入异常"),
+    DATA_REMOVE_ERROR(207, "数据删除异常"),
 
     LOGIN_AUTH(208, "未登陆"),
     PERMISSION(209, "没有权限"),
@@ -34,6 +37,9 @@ public enum ResultCodeEnum {
     PAY_RUN(220, "支付中"),
     CANCEL_ORDER_FAIL(225, "取消订单失败"),
     CANCEL_ORDER_NO(225, "不能取消预约"),
+    MESSAGE_CLIENT_FAIL(226, "短信服务客户端启动失败"),
+    MESSAGE_SENT_FAIL(226, "短信服务端发送失败"),
+    MESSAGE_EXACTED(226, "验证码已经发送"),
 
     HOSCODE_EXIST(230, "医院编号已经存在"),
     NUMBER_NO(240, "可预约号不足"),

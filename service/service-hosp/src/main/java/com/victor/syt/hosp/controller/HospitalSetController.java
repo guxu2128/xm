@@ -2,8 +2,10 @@ package com.victor.syt.hosp.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.victor.commen.result.Result;
+import com.victor.syt.hosp.service.HospitalService;
 import com.victor.syt.hosp.service.HospitalSetService;
 import com.victor.syt.model.hosp.HospitalSet;
+import com.victor.syt.vo.hosp.HospitalSetInsertVo;
 import com.victor.syt.vo.hosp.HospitalSetQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,12 +35,8 @@ public class HospitalSetController {
     @ApiOperation(value = "逻辑删除医院设置")
     @DeleteMapping("{id}")
     public Result removeHospSet(@PathVariable Long id) {
-        boolean flag = hospitalSetService.removeById(id);
-        if(flag) {
-            return Result.ok();
-        } else {
-            return Result.fail();
-        }
+        hospitalSetService.removeById(id);
+        return Result.ok();
     }
 
     //3 条件查询带分页
@@ -55,14 +53,10 @@ public class HospitalSetController {
 
     //4 添加医院设置
     @PostMapping("saveHospitalSet")
-    public Result saveHospitalSet(@RequestBody HospitalSet hospitalSet) {
+    public Result saveHospitalSet(@RequestBody HospitalSetInsertVo hospitalSetInsertVo) {
         //调用service
-        boolean save = hospitalSetService.save(hospitalSet);
-        if(save) {
-            return Result.ok();
-        } else {
-            return Result.fail();
-        }
+        hospitalSetService.save(hospitalSetInsertVo);
+        return Result.ok();
     }
 
     //5 根据id获取医院设置
@@ -74,13 +68,9 @@ public class HospitalSetController {
 
     //6 修改医院设置
     @PostMapping("updateHospitalSet")
-    public Result updateHospitalSet(@RequestBody HospitalSet hospitalSet) {
-        boolean flag = hospitalSetService.updateById(hospitalSet);
-        if(flag) {
-            return Result.ok();
-        } else {
-            return Result.fail();
-        }
+    public Result updateHospitalSet(@RequestBody HospitalSetInsertVo hospitalSetInsertVo) {
+        hospitalSetService.updateById(hospitalSetInsertVo);
+        return Result.ok();
     }
 
     //7 批量删除医院设置
@@ -89,4 +79,15 @@ public class HospitalSetController {
         hospitalSetService.removeByIds(idList);
         return Result.ok();
     }
+
+    //8 医院设置锁定和解锁
+    @PutMapping("lockHospitalSet/{id}/{status}")
+    public Result lockHospitalSet(@PathVariable Long id,
+                                  @PathVariable Integer status) {
+        hospitalSetService.lockHospitalSetById(id, status);
+        return Result.ok();
+    }
+
+
+
 }
