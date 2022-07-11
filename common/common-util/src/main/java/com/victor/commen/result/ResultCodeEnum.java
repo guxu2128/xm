@@ -37,6 +37,9 @@ public enum ResultCodeEnum {
     PAY_RUN(220, "支付中"),
     CANCEL_ORDER_FAIL(225, "取消订单失败"),
     CANCEL_ORDER_NO(225, "不能取消预约"),
+    MESSAGE_CLIENT_FAIL(226, "短信服务客户端启动失败"),
+    MESSAGE_SENT_FAIL(226, "短信服务端发送失败"),
+    MESSAGE_EXACTED(226, "验证码已经发送"),
 
     HOSCODE_EXIST(230, "医院编号已经存在"),
     NUMBER_NO(240, "可预约号不足"),

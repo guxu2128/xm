@@ -1,4 +1,4 @@
-package com.victor.commen.util;
+package com.victor.commen.utils;
 
 import org.apache.commons.codec.binary.Base64;
 
