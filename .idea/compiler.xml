@@ -14,6 +14,7 @@
         <module name="service-cmn-client" />
         <module name="service-user" />
         <module name="model" />
+        <module name="service-oss" />
         <module name="service-util" />
         <module name="service-hosp" />
         <module name="hospital-manage" />
@@ -29,6 +30,7 @@
       <module name="service-cmn-client" options="-parameters" />
       <module name="service-hosp" options="-parameters" />
       <module name="service-msm" options="-parameters" />
+      <module name="service-oss" options="-parameters" />
       <module name="service-user" options="-parameters" />
       <module name="service-util" options="-parameters" />
       <module name="xm" options="-parameters" />

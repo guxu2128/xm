@@ -12,6 +12,7 @@
         <module>service-cmn</module>
         <module>service-user</module>
         <module>service-msm</module>
+        <module>service-oss</module>
     </modules>
     <packaging>pom</packaging>
     <parent>
