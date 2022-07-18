@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.victor.syt.model.order.OrderInfo;
+import com.victor.syt.vo.order.OrderCountQueryVo;
 import com.victor.syt.vo.order.OrderQueryVo;
 
 import java.util.Map;
@@ -27,5 +28,9 @@ public interface OrderService extends IService<OrderInfo> {
     Map<String,Object> show(Long orderId);
 
     void patientTips();
+    /**
+     * 订单统计
+     */
+    Map<String, Object> getCountMap(OrderCountQueryVo orderCountQueryVo);
 
 }
