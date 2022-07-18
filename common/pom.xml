@@ -6,6 +6,7 @@
     <modules>
         <module>common-util</module>
         <module>service-util</module>
+        <module>rabbit-util</module>
     </modules>
     <parent>
         <groupId>com.victor</groupId>

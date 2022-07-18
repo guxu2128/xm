@@ -11,8 +11,8 @@ import com.victor.commen.exception.GeneralException;
 import com.victor.commen.result.ResultCodeEnum;
 import com.victor.commen.utils.RandomUtil;
 import com.victor.syt.msm.service.MsmService;
-import com.victor.syt.msm.service.Sample;
 import com.victor.syt.msm.utils.ConstantPropertiesUtils;
+import com.victor.syt.vo.msm.MsmVo;
 import io.jsonwebtoken.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class MsmServiceImpl implements MsmService {
             throw new GeneralException(ResultCodeEnum.MESSAGE_EXACTED);
         }
         try {
-            client = Sample.createClient(ConstantPropertiesUtils.ACCESS_KEY_ID, ConstantPropertiesUtils.SECRET);
+            client = createClient(ConstantPropertiesUtils.ACCESS_KEY_ID, ConstantPropertiesUtils.SECRET);
         } catch (Exception e) {
             throw new GeneralException(ResultCodeEnum.MESSAGE_CLIENT_FAIL);
         }
@@ -59,6 +59,16 @@ public class MsmServiceImpl implements MsmService {
         }
         redisTemplate.opsForValue().set(phone,code, 1L, TimeUnit.MINUTES);
     }
+
+    @Override
+    public boolean send(MsmVo msmVo) {
+        if(!StringUtils.isEmpty(msmVo.getPhone())) {
+            this.send(msmVo.getPhone());
+            return true;
+        }
+        return false;
+    }
+
 
     public static Client createClient(String accessKeyId, String accessKeySecret) throws Exception {
         Config config = new Config()
