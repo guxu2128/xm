@@ -1,5 +1,7 @@
 package com.victor.commen.helper;
 
+import com.alibaba.fastjson.JSONObject;
+import com.victor.commen.utils.HttpUtil;
 import com.victor.commen.utils.MD5;
 import lombok.extern.slf4j.Slf4j;
 
@@ -71,5 +73,31 @@ public class HttpRequestHelper {
     public static long getTimestamp() {
         return new Date().getTime();
     }
+
+
+
+    /**
+     * 封装同步请求
+     */
+    public static JSONObject sendRequest(Map<String, Object> paramMap, String url){
+        String result = "";
+        try {
+            //封装post参数
+            StringBuilder postdata = new StringBuilder();
+            for (Map.Entry<String, Object> param : paramMap.entrySet()) {
+                postdata.append(param.getKey()).append("=")
+                        .append(param.getValue()).append("&");
+            }
+            log.info(String.format("--> 发送请求：post data %1s", postdata));
+            byte[] reqData = postdata.toString().getBytes("utf-8");
+            byte[] respdata = HttpUtil.doPost(url,reqData);
+            result = new String(respdata);
+            log.info(String.format("--> 应答结果：result data %1s", result));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return JSONObject.parseObject(result);
+    }
+
 
 }

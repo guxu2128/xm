@@ -11,6 +11,7 @@ import com.victor.syt.hosp.service.HospitalSetService;
 import com.victor.syt.model.hosp.HospitalSet;
 import com.victor.syt.vo.hosp.HospitalSetInsertVo;
 import com.victor.syt.vo.hosp.HospitalSetQueryVo;
+import com.victor.syt.vo.order.SignInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -89,6 +90,22 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
         }
         return hospitalSet.getSignKey();
     }
+
+    //获取医院签名信息
+    @Override
+    public SignInfoVo getSignInfoVo(String hoscode) {
+        QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
+        wrapper.eq("hoscode",hoscode);
+        HospitalSet hospitalSet = baseMapper.selectOne(wrapper);
+        if(null == hospitalSet) {
+            throw new GeneralException(ResultCodeEnum.HOSPITAL_OPEN);
+        }
+        SignInfoVo signInfoVo = new SignInfoVo();
+        signInfoVo.setApiUrl(hospitalSet.getApiUrl());
+        signInfoVo.setSignKey(hospitalSet.getSignKey());
+        return signInfoVo;
+    }
+
 
     /**
      * 根据hoscode获取医院设置

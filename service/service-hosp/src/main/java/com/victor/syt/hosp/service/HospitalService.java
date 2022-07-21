@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface HospitalService {
     void save(HttpServletRequest request);
     Hospital getByHoscode(HttpServletRequest request);
-
+    Hospital getByHoscode(String hoscode);
     Object selectPage(Integer page, Integer limit, HospitalQueryVo hospitalQueryVo);
 
     void updateStatus(String id, Integer status);
